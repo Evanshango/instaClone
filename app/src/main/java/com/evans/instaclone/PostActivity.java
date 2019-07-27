@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -35,12 +38,12 @@ public class PostActivity extends AppCompatActivity {
     ProgressDialog mDialog;
 
     FirebaseUser mUser;
-    DatabaseReference mRef;
+    DatabaseReference mRef, userRef;
 
     EditText mDescription;
     Button mCreatePost;
     ImageView mImage;
-    private String mUrl;
+    private String mUrl, username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,10 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         mDialog = new ProgressDialog(this);
+
+        userRef = FirebaseDatabase.getInstance().getReference("users");
+
+        username = userRef.child("username").toString();
 
         init();
 
@@ -88,6 +95,7 @@ public class PostActivity extends AppCompatActivity {
             hashMap.put("userId", userId);
             hashMap.put("description", description);
             hashMap.put("imageUrl", url);
+            hashMap.put("username", username);
 
             mRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

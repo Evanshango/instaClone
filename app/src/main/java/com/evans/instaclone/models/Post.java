@@ -1,16 +1,16 @@
 package com.evans.instaclone.models;
 
-public class Posts {
+public class Post {
 
-    private String description, imageUrl, userId;
+    private String description, imageUrl, userId, username;
 
-    public Posts() {
-    }
+    public Post() {}
 
-    public Posts(String description, String imageUrl, String userId) {
+    public Post(String description, String imageUrl, String userId) {
         this.description = description;
         this.imageUrl = imageUrl;
         this.userId = userId;
+        this.username = username;
     }
 
     public String getDescription() {
@@ -36,4 +36,13 @@ public class Posts {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
+

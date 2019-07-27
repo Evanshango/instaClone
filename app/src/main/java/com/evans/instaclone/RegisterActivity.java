@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -112,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                             mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         mDialog.dismiss();
                                         Toast.makeText(RegisterActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
@@ -122,7 +123,9 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         } else {
                             mDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,
+                                    Objects.requireNonNull(task.getException()).toString(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
