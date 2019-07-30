@@ -35,9 +35,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference postsRef;
     String userId;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public HomeFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,7 +74,6 @@ public class HomeFragment extends Fragment {
                 mAdapter = new PostAdapter(getContext(), mPosts);
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -86,6 +83,5 @@ public class HomeFragment extends Fragment {
         });
 
     }
-
 
 }
